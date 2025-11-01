@@ -8,7 +8,7 @@
     var sql = "SELECT * FROM BoardGame WHERE Name LIKE CONCAT(@0, '%')";
 
 
-    var data = db.Query(sql, Request.Form["searchText"]);
+    var data = db.Query(sql, Request["searchText"]);
 
 
 }
@@ -22,7 +22,12 @@
     <div class="col-2"><button type="submit" class="btn btn-primary">Search</button></div>
 </form>
 
-<!--Display table-->
+<!-- Toggle Button -->
+<div class="mb-3 text-center">
+    <button id="toogleView" type="button" class="btn btn-outline-danger-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Switch to Card View</button>
+</div>
+
+<!--Display table mode-->
 <table class="table">
     <thead>
         <tr>
@@ -58,10 +63,38 @@
 
         else
         {
-            <h2 class="text-danger text-center">No board games found</h2>
-
+            <tr>
+                <td colspan="8" class="text-center text-danger">No board games found</td>
+            </tr>
 
         }
 
     </tbody>
 </table>
+
+<!-- Card View -->
+<div class="card" style="width: 18rem;">
+    @if (data != null)
+    {
+        foreach (var g in data)
+        {
+
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                    <p class="card-text small text-muted">@g.Description</p>
+                        <ul class="list-unstyled mb-2">
+                        <li>Year Published:@g.YearPublished</li>
+                        <li>Min players:@g.MinPlayers</li>
+                        <li>Max Players:@g.MaxPlayers</li>
+                        <li>Language Ease:@g.LanguageEase</li>
+                        <li>Family:@g.Family</li>
+                        </ul>
+            </div>
+</div>
+        }
+    }
+    else
+    {
+        <div class="col-12 text-center text-danger">No board games found</div>
+    }
+
