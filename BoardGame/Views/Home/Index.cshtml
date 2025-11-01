@@ -1,4 +1,4 @@
-﻿@using WebMatrix.Data; 
+﻿@using WebMatrix.Data;
 
 @{
     ViewBag.Title = "Home Page";
@@ -12,6 +12,50 @@
 
 
 }
+
+<div class="py -1 mt-2 bg-light text-center">
+    <h2 class="text-center">Index Page</h2>
+</div>
+
+<form method="get" action="/Home/Index" class="row">
+    <div class="col-3"><input type="text" name="searchText" id="searchText" class="form-control" placeholder="Search Board Game Information" value="@Request.Form["searchText"]" /></div>
+    <div class="col-2"><button type="submit" class="btn btn-primary">Search</button></div>
+</form>
+
+<!--Display table-->
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Year Published</th>
+            <th scope="col">Minimum Players</th>
+            <th scope="col">Maximum Players</th>
+            <th scope="col">Com Age Rec</th>
+            <th scope="col">Language Ease</th>
+            <th scope="col">Family</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach
+            {
+                <tr>
+                    <td>@g.Name</td>
+                    <td>@g.Description</td>
+                    <td>@g.YearPublished</td>
+                    <td>@g.MinimumPlayers</td>
+                    <td>@g.MaximumPlayers</td>
+                    <td>@g.ComAgeRec</td>
+                    <td>@g.LanguageEase</td>
+                    <td>@g.Family</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+            
+        
+      
 
 <main>
     <section class="row" aria-labelledby="aspnetTitle">
