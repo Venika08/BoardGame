@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Home Page";
 
-    var db = Database.Open("BoardGames");
+    var db = Database.Open("BoardGame");
 
     var sql = "SELECT * FROM BoardGame WHERE Name LIKE CONCAT(@0, '%')";
 
