@@ -23,8 +23,8 @@
 </form>
 
 <!-- Toggle Button -->
-<div class="mb-3 text-center">
-    <button id="toogleView" type="button" class="btn btn-outline-danger-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Switch to Card View</button>
+<div class="theme-toggle">
+    <button onclick="toggleTheme()"><b>Switch to Card View</b></button>
 </div>
 
 <!--Display table mode-->
@@ -72,7 +72,7 @@
     </tbody>
 </table>
 
-<!-- Card View -->
+<!-- Card View (hidden by default)-->
 <div class="card" style="width: 18rem;">
     @if (data != null)
     {
@@ -98,3 +98,14 @@
         <div class="col-12 text-center text-danger">No board games found</div>
     }
 
+<script>
+
+    //This function switches betwen table and card view
+    function toggleTheme() {
+        const tableView = document.getElementById("tableView");
+        const cardView = document.getElementById("cardView");
+        const btn = document.getElementById("toggleBtn");
+
+    }
+
+</script>
