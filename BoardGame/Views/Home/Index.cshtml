@@ -1,5 +1,16 @@
-﻿@{
+﻿@using WebMatrix.Data; 
+
+@{
     ViewBag.Title = "Home Page";
+
+    var db = Database.Open("Board Games");
+
+    var sql = "SELECT * FROM BoardGame WHERE Name LIKE CONCAT(@0, '%')";
+
+
+    var data = db.Query(sql, Request.Form["searchText"]);
+
+
 }
 
 <main>
