@@ -74,31 +74,36 @@
 </div>
 
 <!-- Card View (hidden by default)-->
-<div id="cardView">
-    <div class="card" style="width: 18rem;"></div>
-        @if (data != null)
-        {
-            foreach (var g in data)
+<div class="container mt-4"></div>
+    <div class="row"></div>
+    <div id="cardView">
+        <div class="card" style="width: 18rem;"></div>
+        <div class="col-md-3 mb-4">
+            @if (data != null)
             {
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                        <p class="card-text small text-muted">@g.Description</p>
-                            <ul class="list-unstyled mb-2">
-                                <li>Year Published:@g.YearPublished</li>
-                                <li>Min players:@g.MinPlayers</li>
-                                <li>Max Players:@g.MaxPlayers</li>
-                                <li>Language Ease:@g.LanguageEase</li>
-                                <li>Family:@g.Family</li>
-                            </ul>
-                </div>
-   
-            }
-        }
-        else
-        {
-            <div class="col-12 text-center text-danger">No board games found</div>
-        }
+                foreach (var g in data)
+                {
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                            <p class="card-text small text-muted">@g.Description</p>
+                                <ul class="list-unstyled mb-2">
+                                    <li class="list-group-item">Year Published:@g.YearPublished</li>
+                                    <li class="list-group-item">Min players:@g.MinPlayers</li>
+                                    <li class="list-group-item">Max Players:@g.MaxPlayers</li>
+                                    <li class="list-group-item">Language Ease:@g.LanguageEase</li>
+                                    <li class="list-group-item">Family:@g.Family</li>
+                                </ul>
+                                <div class="card-footer text-center"></div>
+                    </div>
 </div>
+   
+                }
+            }
+            else
+            {
+                <div class="col-12 text-center text-danger">No board games found</div>
+            }
+    </div>
         
 <script>
 
