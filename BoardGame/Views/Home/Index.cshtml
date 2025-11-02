@@ -24,80 +24,82 @@
 
 <!-- Toggle Button -->
 <div class="theme-toggle">
-    <button onclick="toggleTheme()"><b>Switch to Card View</b></button>
+    <button id="toggleBtn" class="btn btn-secondary" onclick="toggleTheme()"><b>Switch to Card View</b></button>
 </div>
 
 <!--Display table mode-->
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Year Published</th>
-            <th scope="col">Minimum Players</th>
-            <th scope="col">Maximum Players</th>
-            <th scope="col">Com Age Rec</th>
-            <th scope="col">Language Ease</th>
-            <th scope="col">Family</th>
+<div id="tableView">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Year Published</th>
+                <th scope="col">Minimum Players</th>
+                <th scope="col">Maximum Players</th>
+                <th scope="col">Com Age Rec</th>
+                <th scope="col">Language Ease</th>
+                <th scope="col">Family</th>
 
-        </tr>
-    </thead>
-    <tbody>
+            </tr>
+        </thead>
+        <tbody>
+            @if (data != null)
+            {
+                foreach (var g in data)
+                {
+                    <tr>
+                        <td>@g.Name</td>
+                        <td>@g.Description</td>
+                        <td>@g.YearPublished</td>
+                        <td>@g.MinPlayers</td>
+                        <td>@g.MaxPlayers</td>
+                        <td>@g.ComAgeRec</td>
+                        <td>@g.LanguageEase</td>
+                        <td>@g.Family</td>
+
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8" class="text-center text-danger">No board games found</td>
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+</div>
+
+<!-- Card View (hidden by default)-->
+<div id="cardView">
+    <div class="card" style="width: 18rem;"></div>
         @if (data != null)
         {
             foreach (var g in data)
             {
-                <tr>
-                    <td>@g.Name</td>
-                    <td>@g.Description</td>
-                    <td>@g.YearPublished</td>
-                    <td>@g.MinPlayers</td>
-                    <td>@g.MaxPlayers</td>
-                    <td>@g.ComAgeRec</td>
-                    <td>@g.LanguageEase</td>
-                    <td>@g.Family</td>
-
-                </tr>
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                        <p class="card-text small text-muted">@g.Description</p>
+                            <ul class="list-unstyled mb-2">
+                                <li>Year Published:@g.YearPublished</li>
+                                <li>Min players:@g.MinPlayers</li>
+                                <li>Max Players:@g.MaxPlayers</li>
+                                <li>Language Ease:@g.LanguageEase</li>
+                                <li>Family:@g.Family</li>
+                            </ul>
+                </div>
+   
             }
         }
-
         else
         {
-            <tr>
-                <td colspan="8" class="text-center text-danger">No board games found</td>
-            </tr>
-
+            <div class="col-12 text-center text-danger">No board games found</div>
         }
-
-    </tbody>
-</table>
-
-<!-- Card View (hidden by default)-->
-<div class="card" style="width: 18rem;">
-    @if (data != null)
-    {
-        foreach (var g in data)
-        {
-
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                    <p class="card-text small text-muted">@g.Description</p>
-                        <ul class="list-unstyled mb-2">
-                        <li>Year Published:@g.YearPublished</li>
-                        <li>Min players:@g.MinPlayers</li>
-                        <li>Max Players:@g.MaxPlayers</li>
-                        <li>Language Ease:@g.LanguageEase</li>
-                        <li>Family:@g.Family</li>
-                        </ul>
-            </div>
 </div>
-        }
-    }
-    else
-    {
-        <div class="col-12 text-center text-danger">No board games found</div>
-    }
-
+        
 <script>
 
     //This function switches betwen table and card view
@@ -106,6 +108,16 @@
         const cardView = document.getElementById("cardView");
         const btn = document.getElementById("toggleBtn");
 
-    }
+            if (tableView.style.display === 'none') {
+                tableView.style.display = 'block';
+                cardView.style.display = 'none';
+                btn.innerHTML = "<b>Switch to Card View</b>";
+            } else {
+                tableView.style.display = 'none';
+                cardView.style.display = 'flex';
+                btn.innerHTML = "<b>Switch to Table View</b>";
+            }
 
+    }
+    
 </script>
