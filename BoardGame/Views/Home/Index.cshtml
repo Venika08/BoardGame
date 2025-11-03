@@ -7,9 +7,11 @@
 
     var tableView = Request.QueryString["tableView"] ?? "table"; // the default is table
 
+    var searchText = Request.QueryString["searchText"] ?? "";
+
     var sql = "SELECT * FROM BoardGame WHERE Name LIKE CONCAT(@0, '%')";
 
-    var data = db.Query(sql, Request["searchText"]);
+    var data = db.Query(sql, searchText);
 
 
 }
@@ -19,13 +21,14 @@
 </div>
 
 <form method="get" action="/Home/Index" class="row">
-    <div class="col-3"><input type="text" name="searchText" id="searchText" class="form-control" placeholder="Search Board Game Information" value="@Request.Form["searchText"]" /></div>
+    <div class="col-3"><input type="text" name="searchText" id="searchText" class="form-control" placeholder="Search Board Game Information" value="@searchText" /></div>
     <div class="col-2"><button type="submit" class="btn btn-primary">Search</button></div>
+    <input type="hidden" id="tableView" name="tableView" value="@tableView" />
 
     <!-- Toggle Button -->
     <div class="theme-toggle">
-        <button type="submit" id="toggleBtn" class="btn btn-secondary" onclick="document.getElementById('showView').value = 'table'"><b>Table View</b></button>
-        <button type="submit" id="toggleBtn" class="btn btn-secondary" onclick="document.getElementById('showView').value = 'card'"><b>Card View</b></button>
+        <button type="submit" id="toggleBtn" class="btn btn-secondary" onclick="document.getElementById('tableView').value = 'table'"><b>Table View</b></button>
+        <button type="submit" id="toggleBtn" class="btn btn-secondary" onclick="document.getElementById('tableView').value = 'card'"><b>Card View</b></button>
 
     </div>
 </form>
@@ -88,9 +91,8 @@
                                 <h3 class="card-title"> @item.Name </h3>
                                 <p class="card-text"> @item.Description </p>
                                 <ul class="list-styled">
-                                    <li><strong> Year: </strong> @item.Year </li>
+                                    <li><strong> Year: </strong> @item.YearPublished </li>
                                     <li><strong> Family: </strong> @item.Family </li>
-                                    <li><strong> Category: </strong> @item.CategoryName </li>
                                     <li><strong> Minimum Players: </strong> @item.MinPlayers </li>
                                     <li><strong> Maximum Players: </strong> @item.MaxPlayers </li>
                                     <li><strong> Age Recommend: </strong> @item.MfgAgeRec </li>
@@ -108,7 +110,7 @@
 }
 else
 {
-    <h2 class="text-danger text-center">Oops! No matching boarding games returned...</h2>
+    <h2 class="text-danger text-center">Oops! No matching boarding games! </h2>
 }
 
 
